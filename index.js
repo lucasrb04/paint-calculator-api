@@ -5,7 +5,8 @@ const httpStatus = require('http-status');
 
 require('dotenv').config();
 
-const { calculateGallonsService } = require('./src/service');
+const { calculateGallons } = require('./src/service/calculateGallonsService');
+const { roomValidator } = require('./src/middleware/validations');
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,16 +16,16 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/calculate', (request, response) => {
-  const { walls } = request.body;
+app.post('/calculate', roomValidator, (request, response) => {
+  const roomInfo = request.body;
 
-  const paintGallons = calculateGallonsService.calculate(walls);
-
+  const paintGallons = calculateGallons(roomInfo);
   if (paintGallons.message) {
-    response.status(paintGallons.code).send(paintGallons.message);
+    response.status(paintGallons.code).send({ message: paintGallons.message });
   }
+  console.log(paintGallons);
 
-    response.status(httpStatus.HTTP_OK_STATUS).json(paintGallons);
+  response.status(httpStatus.OK).json(paintGallons);
 });
 
 app.listen(PORT, () => {

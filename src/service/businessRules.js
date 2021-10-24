@@ -7,35 +7,55 @@ const isQuadrilateral = (a, b, c, d) => {
     const sumOfOtherSides = sides.reduce((acc, curr) => acc + curr); // soma os outros três lados
     // Comentários sobre a condição de existência de um quadrilátero:
     // https://www.mail-archive.com/obm-l@mat.puc-rio.br/msg34503.html
-    if (sideToTest > sumOfOtherSides) {
-      return false;
+    if (sideToTest < sumOfOtherSides) {
+      return true;
     }
   }   
-  return true;
 };
 
 const validWall = (width, height) => {
-  if (width < 1 || width > 15 || height < 2.2) {
-    return false;
-  } 
-  return true;
+  if (width > 1 || width < 15 || height >= 2.2) return true;
 };
 
-const validOpeningsArea = (windowsNumber, doorsNumber, totalWallArea) => {
+const wallsArea = (walls) => {
+  const totalwallsArea = walls.reduce((sum, wall) => sum + wall.width * wall.height, 0);
+  return totalwallsArea;
+};
+
+const openingArea = (openings) => {
   const WINDOW_AREA = 2;
   const DOOR_AREA = 1.52;
 
-  const totalOpeningsArea = (windowsNumber * WINDOW_AREA) + (doorsNumber * DOOR_AREA);
-
-  if (totalOpeningsArea <= 0.5 * totalWallArea) {
-    return totalWallArea - totalOpeningsArea;
-  }
-  return false;
+  const totalOpeningArea = (openings.windows * WINDOW_AREA) + (openings.doors * DOOR_AREA);
+  return totalOpeningArea;
 };
 
-// const areaToPaint = validOpeningsArea(2, 1, 10);
+const validOpenings = (roomInfo) => {
+  const { walls, openings } = roomInfo;
 
-const paintCans = (paintArea) => {
+  const totalWallArea = wallsArea(walls);
+  const totalOpeningsArea = openingArea(openings);
+
+  if (totalOpeningsArea <= 0.5 * totalWallArea) return true;
+};
+
+const count = (array, number) => array.reduce((acc, curr) => {
+    if (curr === number) {
+      return acc + 1;
+    }
+    return acc;
+  }, 0);
+
+const formatGallons = (gallons) => ({
+  '18L': count(gallons, 18),
+  '3.6L': count(gallons, 3.6),
+  '2.5L': count(gallons, 2.5),
+  '0.5L': count(gallons, 0.5),
+});
+
+const calculateGallons = (roomInfo) => {
+  const paintArea = wallsArea(roomInfo.walls) - openingArea(roomInfo.openings);
+  
   let litersOfPaint = paintArea / 5;
   const typeOfCans = [18, 3.6, 2.5, 0.5];
   const listOfCans = [];
@@ -49,12 +69,12 @@ const paintCans = (paintArea) => {
         litersOfPaint = 0;
       }
     });
-  return listOfCans;
+  return formatGallons(listOfCans);
 };
 
 module.exports = {
   isQuadrilateral,
   validWall,
-  validOpeningsArea,
-  paintCans,
+  validOpenings,
+  calculateGallons,
 };
