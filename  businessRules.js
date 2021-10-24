@@ -5,6 +5,7 @@ const validQuadrilateral = (a, b, c, d) => {
     const sides = [a, b, c, d]; // array com os lados
     const [sideToTest] = sides.splice(index, 1); // remove o lado que está sendo testado e salva em sideToTest
     const sumOfOtherSides = sides.reduce((acc, curr) => acc + curr); // soma os outros três lados
+    // https://www.mail-archive.com/obm-l@mat.puc-rio.br/msg34503.html
     if (sideToTest > sumOfOtherSides) {
       return false;
     }
@@ -31,20 +32,21 @@ const validOpeningsArea = (windowsNumber, doorsNumber, totalWallArea) => {
   return false;
 };
 
-const areaToPaint = 50;
 // const areaToPaint = validOpeningsArea(2, 1, 10);
 
 const paintCans = (paintArea) => {
   let litersOfPaint = paintArea / 5;
   const typeOfCans = [18, 3.6, 2.5, 0.5];
   const listOfCans = [];
-  while (litersOfPaint >= 0.5) {
     typeOfCans.forEach((canSize) => {
-      if (litersOfPaint >= canSize) {
+      while (litersOfPaint >= canSize) {
         litersOfPaint -= canSize;
         listOfCans.push(canSize);
       }
-  });
-  }
+      if (litersOfPaint < 0.5 && litersOfPaint > 0) {
+        listOfCans.push(0.5);
+        litersOfPaint = 0;
+      }
+    });
   return listOfCans;
 };
