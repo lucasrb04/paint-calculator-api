@@ -1,24 +1,32 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
+const httpStatus = require('http-status');
+
 require('dotenv').config();
-// const cors = require('cors');
+
+const { calculateGallonsService } = require('./src/service');
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+// https://medium.com/@alexandremjacques/entendendo-o-cors-parte-8331d0a777e1#.2hy2429si
+app.use(cors());
 app.use(bodyParser.json());
 
-const HTTP_OK_STATUS = 200;
-const PORT = '3000';
+app.post('/calculate', (request, response) => {
+  const { walls } = request.body;
 
-const { validations } = require('./authMiddleware');
+  const paintGallons = calculateGallonsService.calculate(walls);
 
-const talkerRouter = require('./routes/talkerRouter');
+  if (paintGallons.message) {
+    response.status(paintGallons.code).send(paintGallons.message);
+  }
 
-app.post('/calculate', emailValidation, passwordValidation, async (request, response) => {
-  response.status(HTTP_OK_STATUS).json({ token: randomBytes(8).toString('hex') });
+    response.status(httpStatus.HTTP_OK_STATUS).json(paintGallons);
 });
 
-app.use('/talker', talkerRouter);
-
 app.listen(PORT, () => {
-  console.log('Online');
+  console.log(`Escutando na porta ${PORT}`);
 });

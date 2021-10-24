@@ -1,10 +1,11 @@
-const validQuadrilateral = (a, b, c, d) => {
+const isQuadrilateral = (a, b, c, d) => {
   // Para validar se os lados conseguem formar um quadrilátero, 
   // precisamos que um lado seja menor que a soma dos outros três.
   for (let index = 0; index < 4; index += 1) {
     const sides = [a, b, c, d]; // array com os lados
     const [sideToTest] = sides.splice(index, 1); // remove o lado que está sendo testado e salva em sideToTest
     const sumOfOtherSides = sides.reduce((acc, curr) => acc + curr); // soma os outros três lados
+    // Comentários sobre a condição de existência de um quadrilátero:
     // https://www.mail-archive.com/obm-l@mat.puc-rio.br/msg34503.html
     if (sideToTest > sumOfOtherSides) {
       return false;
@@ -22,10 +23,10 @@ const validWall = (width, height) => {
 
 const validOpeningsArea = (windowsNumber, doorsNumber, totalWallArea) => {
   const WINDOW_AREA = 2;
-  const totalWindowArea = windowsNumber * WINDOW_AREA;
   const DOOR_AREA = 1.52;
-  const totalDoorArea = doorsNumber * DOOR_AREA;
-  const totalOpeningsArea = totalWindowArea + totalDoorArea;
+
+  const totalOpeningsArea = (windowsNumber * WINDOW_AREA) + (doorsNumber * DOOR_AREA);
+
   if (totalOpeningsArea <= 0.5 * totalWallArea) {
     return totalWallArea - totalOpeningsArea;
   }
@@ -49,4 +50,11 @@ const paintCans = (paintArea) => {
       }
     });
   return listOfCans;
+};
+
+module.exports = {
+  isQuadrilateral,
+  validWall,
+  validOpeningsArea,
+  paintCans,
 };
