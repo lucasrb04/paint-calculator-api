@@ -16,8 +16,10 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+const WCM_MSG = 'Welcome to the Paint Calculator Api, post the datas of the room in /calculate';
+
 app.get('/', (req, res) => {
-    res.status(httpStatus.OK).send('Hello World');
+    res.status(httpStatus.OK).send(WCM_MSG);
 });
 
 app.post('/calculate', roomValidator, (request, response) => {
