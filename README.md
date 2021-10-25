@@ -1,5 +1,5 @@
 
-# Welcome to the repository of the project Paint Calculator!
+# Welcome to the project Paint Calculator API!
 
 ## 
 
