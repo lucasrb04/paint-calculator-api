@@ -28,16 +28,16 @@ const openingsValidation = (roomInfo) => {
 const validate = (roomInfo) => {
   const validQuadrilateral = quadrilateralValidation(roomInfo.walls);
   if (validQuadrilateral.code) return validQuadrilateral;
-  
+
   const validOpeningsArea = openingsValidation(roomInfo);
   if (validOpeningsArea.code) return validOpeningsArea;
 };
 
-const calculateGallons = (roomInfo) => {
+const calculatePaintCans = (roomInfo) => {
   const validation = validate(roomInfo);
   if (validation) return validation;
-  const gallons = businessRules.calculateGallons(roomInfo);
+  const gallons = businessRules.calculatePaintCans(roomInfo);
   return gallons;
 };
 
-module.exports = { calculateGallons };
+module.exports = { calculatePaintCans };
