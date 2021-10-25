@@ -8,7 +8,7 @@ const quadrilateralValidation = (walls) => {
   if (!isValidQuadrilateral) {
     return {
       code: httpStatus.BAD_REQUEST,
-      message: 'Não é possível construir um quarto com paredes destes tamanhos.',
+      message: 'Does not exist a room with this dimensions.',
     };
   }
   return isValidQuadrilateral;
@@ -19,7 +19,7 @@ const openingsValidation = (roomInfo) => {
   if (!isValidOpening) {
     return {
       code: httpStatus.BAD_REQUEST,
-      message: 'Não é possível construir um quarto com esse número de portas e/ou janelas.',
+      message: 'It is not possible to build a room with this number of openings.',
     };
   }
   return isValidOpening;
