@@ -5,7 +5,7 @@ const httpStatus = require('http-status');
 
 require('dotenv').config();
 
-const { calculateGallons } = require('./src/service/calculateGallonsService');
+const { calculatePaintCans } = require('./src/service/calculateGallonsService');
 const { roomValidator } = require('./src/middleware/validations');
 
 const PORT = process.env.PORT || 3000;
@@ -16,22 +16,20 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const WCM_MSG = 'Welcome to the Paint Calculator Api, post the datas of the room in /calculate';
+const WELCOME_MSG = 'Welcome to the Paint Calculator Api, post the datas of the room in /calculate';
 
 app.get('/', (req, res) => {
-    res.status(httpStatus.OK).send(WCM_MSG);
+    res.status(httpStatus.OK).send(WELCOME_MSG);
 });
 
 app.post('/calculate', roomValidator, (request, response) => {
   const roomInfo = request.body;
 
-  const paintGallons = calculateGallons(roomInfo);
-  if (paintGallons.message) {
-    response.status(paintGallons.code).send({ message: paintGallons.message });
+  const paintCans = calculatePaintCans(roomInfo);
+  if (paintCans.message) {
+    return response.status(paintCans.code).send({ message: paintCans.message });
   }
-  console.log(paintGallons);
-
-  response.status(httpStatus.OK).json(paintGallons);
+  return response.status(httpStatus.OK).json(paintCans);
 });
 
 app.listen(PORT, () => {

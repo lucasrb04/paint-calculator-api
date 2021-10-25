@@ -2,17 +2,6 @@ const httpStatus = require('http-status');
 
 const businessRules = require('./businessRules');
 
-const WallsValidation = (walls) => {
-  const isValidWall = walls.every((wall) => businessRules.validWall(wall.width, wall.height));
-  if (!isValidWall) {
-    return {
-      code: httpStatus.BAD_REQUEST,
-      message: 'Comprimento ou altura fora dos valores específicados.',
-    };
-  }
-  return isValidWall;
-};
-
 const quadrilateralValidation = (walls) => {
   const arrayOfSides = walls.map((wall) => wall.width);
   const isValidQuadrilateral = businessRules.isQuadrilateral(...arrayOfSides);
@@ -30,21 +19,18 @@ const openingsValidation = (roomInfo) => {
   if (!isValidOpening) {
     return {
       code: httpStatus.BAD_REQUEST,
-      message: 'Não é possível construir um quarto com esse número de portas e janelas.',
+      message: 'Não é possível construir um quarto com esse número de portas e/ou janelas.',
     };
   }
   return isValidOpening;
 };
 
 const validate = (roomInfo) => {
-    const validWalls = WallsValidation(roomInfo.walls);
-    if (!validWalls) return validWalls;
-
-    const validQuadrilateral = quadrilateralValidation(roomInfo.walls);
-    if (!validQuadrilateral) return validQuadrilateral;
+  const validQuadrilateral = quadrilateralValidation(roomInfo.walls);
+  if (validQuadrilateral.code) return validQuadrilateral;
   
-    const validOpeningsArea = openingsValidation(roomInfo);
-    if (!validOpeningsArea) return validOpeningsArea;
+  const validOpeningsArea = openingsValidation(roomInfo);
+  if (validOpeningsArea.code) return validOpeningsArea;
 };
 
 const calculateGallons = (roomInfo) => {
