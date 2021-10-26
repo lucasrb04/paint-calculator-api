@@ -1,43 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PaintCans = (PaintCansList) => (
-  <div className="col m6 s12">
-    <div className="card">
-      <div className="card-content">
-        {/* <span className="card-title" data-test="bmi">
-            BMI:
-          {' '}
-          {bmi}
-        </span>
-        <div className="card-data">
-          <span data-test="weight">
-              Weight:
-            {' '}
-            {weight}
-            {' '}
-              kg
-          </span>
-          <span data-test="height">
-              Height:
-            {' '}
-            {height}
-            {' '}
-              cm
-          </span>
-          <span data-test="date">
-              Date:
-            {' '}
-            {date}
-          </span>
-        </div> */}
-      </div>
+const PaintCans = ({ cans }) => {
+  const CansTypes = Object.keys(cans);
+  const CansValues = Object.values(cans);
+  console.log(CansTypes);
+  console.log(CansValues);
+  return (
+    <div className="row m6 s12">
+      {CansTypes.map((paintCan, index) => (
+        <div key={ paintCan } className="card">
+          <div className="card-content">
+            <span className="card-title">
+              { paintCan }
+            </span>
+          </div>
+        </div>
+      ))}
     </div>
-  </div>
-);
+  );
+};
 
 PaintCans.propTypes = {
-  PaintCansList: PropTypes.objectOf(PropTypes.string),
+  PaintCansList: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default PaintCans;

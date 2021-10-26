@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
-import CalcForm from '../CalcForm/CalcForm';
+import RoomForm from '../RoomForm/RoomForm';
 import PaintCans from '../PaintCans/PaintCans';
 import api from '../../services/calculateApi';
 
@@ -27,22 +27,22 @@ const App = () => {
   // useEffect(() => {
   //   console.log('roomInfo', roomInfo);
   // }, [roomInfo]);
-
+  console.log('cansList', cansList);
   return (
     <div className="container">
       <div className="row center">
         <h1 className="white-text"> Paint Calculator </h1>
       </div>
       <div className="row">
-        <div className="col m12 s12">
-          <CalcForm change={ handleChange } />
-          <div className="row center">
-            <h4 className="white-text">Pai</h4>
-          </div>
-          <div className="data-container row">
-            { cansList !== {} && <PaintCans cans={ cansList } /> }
-          </div>
+        <div className="col m9 s12">
+          <RoomForm change={ handleChange } />
         </div>
+      </div>
+      <div className="data-container row">
+        <div className="row center">
+          <h4 className="white-text">Values</h4>
+        </div>
+        { cansList !== {} && <PaintCans cans={ cansList } /> }
       </div>
     </div>
   );
