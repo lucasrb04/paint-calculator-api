@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import 'materialize-css/dist/css/materialize.min.css';
 import './App.css';
-import RoomForm from '../RoomForm/RoomForm';
-import PaintCans from '../PaintCans/PaintCans';
-import api from '../../services/calculateApi';
+import RoomForm from './components/RoomForm/RoomForm';
+import PaintCans from './components/PaintCans/PaintCans';
+import api from './services/calculateApi';
 
 const App = () => {
   const [cansList, setCansList] = useState({});
