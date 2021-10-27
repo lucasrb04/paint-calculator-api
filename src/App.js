@@ -12,9 +12,9 @@ const App = () => {
   const handleChange = async (roomObjInfo) => {
     const paintCans = await api(roomObjInfo);
     if (paintCans.message) {
-      const TIME_ERROR = 3000;
+      const TIME_ERR = 3000;
       setErrorMsg(paintCans.message);
-      setTimeout(() => { setErrorMsg(''); }, TIME_ERROR);
+      setTimeout(() => { setErrorMsg(''); }, TIME_ERR);
     } else {
       setCansList(paintCans);
     }
