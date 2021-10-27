@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
+import './RoomForm.css';
 import PropTypes from 'prop-types';
-import '../App/App.css';
 
 const initialWallValues = {
   wall0: {
-    width0: 3,
-    height0: 3,
+    width0: '',
+    height0: '',
   },
   wall1: {
-    width1: 3,
-    height1: 3,
+    width1: '',
+    height1: '',
   },
   wall2: {
-    width2: 3,
-    height2: 3,
+    width2: '',
+    height2: '',
   },
   wall3: {
-    width3: 3,
-    height3: 3,
+    width3: '',
+    height3: '',
   },
 };
 
 const initialOpeningsValues = {
-  windows: 3,
-  doors: 3,
+  windows: '',
+  doors: '',
 };
 
 const RoomForm = ({ change }) => {
@@ -80,14 +80,13 @@ const RoomForm = ({ change }) => {
 
   const handleSubmit = () => {
     const data = formatData(walls, openings);
-    console.log(data);
     change(data);
   };
 
   return (
-    <>
+    <div className="calc-container">
       <div className="walls-especifications">
-        <h3 className="white-text "> Walls especifications </h3>
+        <h3 className="white-text"> Walls especifications </h3>
         { Object.keys(walls).map((wall, idx) => (
           <div key={ wall } className="row">
             <div className="col m3 s12">
@@ -126,10 +125,10 @@ const RoomForm = ({ change }) => {
         ))}
       </div>
       <div className="openings-especifications">
-        <h3 className="white-text "> Openings especifications </h3>
+        <h3 className="white-text"> Openings especifications </h3>
         { Object.keys(openings).map((opening) => (
           <div key={ opening } className="line">
-            <div className="col m3 s12">
+            <div className="col m3 s6">
               <label htmlFor={ opening }>
             Number of
                 {' '}
@@ -146,12 +145,11 @@ const RoomForm = ({ change }) => {
             </div>
           </div>
         ))}
-
       </div>
-      <div className="">
+      <div className="calc-btn">
         <button
           id="calc-btn"
-          className="calculate-btn"
+          className="calculate-btn "
           type="button"
           // disabled={state.weight === '' || state.height === ''}
           onClick={ handleSubmit }
@@ -159,7 +157,7 @@ const RoomForm = ({ change }) => {
         Calculate PaintCans
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

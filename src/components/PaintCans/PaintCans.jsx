@@ -1,18 +1,22 @@
 import React from 'react';
+import './PaintCans.css';
+
 import PropTypes from 'prop-types';
 
 const PaintCans = ({ cans }) => {
-  const CansTypes = Object.keys(cans);
+  const CansTypes = ['18L', '3.6L', '2.5L', '0.5L'];
   const CansValues = Object.values(cans);
-  console.log(CansTypes);
-  console.log(CansValues);
+
   return (
-    <div className="row m6 s12">
+    <div className="paint-container data-container">
+
+      <h4 className="white-text">Values</h4>
       {CansTypes.map((paintCan, index) => (
         <div key={ paintCan } className="card">
           <div className="card-content">
             <span className="card-title">
-              { paintCan }
+              { `${paintCan}: ` }
+              { CansValues[index] }
             </span>
           </div>
         </div>
@@ -22,7 +26,7 @@ const PaintCans = ({ cans }) => {
 };
 
 PaintCans.propTypes = {
-  PaintCansList: PropTypes.objectOf(PropTypes.number).isRequired,
+  cans: PropTypes.objectOf(PropTypes.number).isRequired,
 };
 
 export default PaintCans;

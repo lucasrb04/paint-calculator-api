@@ -1,0 +1,10 @@
+.calc-container {
+  height: 750px;
+  margin-left: 5%;
+}
+
+.calc-btn {
+  position: absolute;
+  top: 770px;
+  margin-left: 5%;
+}

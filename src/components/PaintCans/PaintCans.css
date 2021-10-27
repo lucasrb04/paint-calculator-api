@@ -1,0 +1,12 @@
+.paint-container {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  padding: 40px;
+}
+
+.calc-btn {
+  position: absolute;
+  top: 770px;
+  left: 13%;
+}
