@@ -38,7 +38,6 @@ npm install
 # Agora volte ao diretório raiz e entre no frontend
 cd ..
 cd frontend
-npm start
 
 # Rode o projeto
 npm start
