@@ -20,8 +20,6 @@ Esse projeto foi desenvolvido com a seguinte técnologias:
 - NodeJS
 - Chai
 
-[nodeJs]: https://nodejs.org
-
 #### :thinking: Como rodar
 
 ```bash
@@ -45,8 +43,6 @@ npm start
 # Rode o projeto
 npm start
 ```
-
-```bash
 
 ### A interface:
 ![image](https://user-images.githubusercontent.com/20855321/139308552-7f085ab2-a44e-4a41-b9c0-c748b40de2ab.png)
