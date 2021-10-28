@@ -73,6 +73,8 @@ const calculatePaintCans = (roomInfo) => {
 module.exports = {
   isQuadrilateral,
   wallsArea,
+  countCans,
+  formatCans,
   openingsArea,
   validOpenings,
   calculatePaintCans,
