@@ -10,16 +10,15 @@
 
 **Descrição**
 
-A ideia do desafio é desenvolver uma aplicação que retorne o número de latas de tinta são necessárias para pintar um quarto, a partir do tamanho das paredes do quarto e do número de portas e janelas.
+A ideia do desafio é desenvolver uma aplicação que retorne o número de latas de tinta necessárias para pintar um quarto, a partir do tamanho das paredes do quarto e do número de portas e janelas.
 A aplicação foi separada em dois repositórios, a api, com todas as regras de négócio e o app, com a visualização da aplicação.
 ### :nut_and_bolt: Tecnologias
 
 Esse projeto foi desenvolvido com a seguinte técnologias:
 
-- [React][reactjs]
-- [Hooks][reactjs]
+- React
 - NodeJS
-- Chai[tests]
+- Chai
 
 [nodeJs]: https://nodejs.org
 
