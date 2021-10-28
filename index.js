@@ -16,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const WELCOME_MSG = 'Welcome to the Paint Calculator Api, post the datas of the room in /calculate';
+const WELCOME_MSG = 'Welcome to the Paint Calculator Api, post the info of the room in /calculate';
 
 app.get('/', (req, res) => {
     res.status(httpStatus.OK).send(WELCOME_MSG);
