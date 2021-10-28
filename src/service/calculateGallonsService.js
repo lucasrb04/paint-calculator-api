@@ -25,19 +25,19 @@ const openingsValidation = (roomInfo) => {
   return isValidOpening;
 };
 
-const validate = (roomInfo) => {
+const calculatePaintCans = (roomInfo) => {
   const validQuadrilateral = quadrilateralValidation(roomInfo.walls);
   if (validQuadrilateral.code) return validQuadrilateral;
-
+  
   const validOpeningsArea = openingsValidation(roomInfo);
   if (validOpeningsArea.code) return validOpeningsArea;
-};
 
-const calculatePaintCans = (roomInfo) => {
-  const validation = validate(roomInfo);
-  if (validation) return validation;
   const gallons = businessRules.calculatePaintCans(roomInfo);
   return gallons;
 };
 
-module.exports = { calculatePaintCans };
+module.exports = { 
+  calculatePaintCans,
+  openingsValidation,
+  quadrilateralValidation,
+ };
