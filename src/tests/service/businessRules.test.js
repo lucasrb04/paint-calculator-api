@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable max-lines-per-function */
 const { expect } = require('chai');
 
@@ -7,13 +8,13 @@ const businessRules = require('../../service/businessRules');
     it('Returns true when the four parameters complete a quadrilateral', () => {
       const response = businessRules.isQuadrilateral(2, 2, 2, 2);
 
-      expect(response).equal(true);
+      expect(response).to.be.equals(true);
     });
 
     it('Returns false when one of the sides are greater than sum of the other three', () => {
       const response = businessRules.isQuadrilateral(2, 10, 2, 2);
 
-      expect(response).equal(false);
+      expect(response).to.be.equals(false);
     });
   });
   
@@ -47,7 +48,7 @@ const businessRules = require('../../service/businessRules');
       it('Returns the area of the walls ', () => {
         const roomArea = businessRules.wallsArea(wallsArray);
 
-        expect(roomArea).equal(TOTAL_WALLS_AREA);
+        expect(roomArea).to.be.equals(TOTAL_WALLS_AREA);
       });
     });
 
@@ -57,7 +58,7 @@ const businessRules = require('../../service/businessRules');
       it('Returns the area of the openings ', () => {
         const openingsArea = businessRules.openingsArea(openingObj);
 
-        expect(openingsArea).equal(TOTAL_OPENINGS_AREA);
+        expect(openingsArea).to.be.equal(TOTAL_OPENINGS_AREA);
       });
     });
 
@@ -66,12 +67,17 @@ const businessRules = require('../../service/businessRules');
         walls: wallsArray,
         openings: openingObj,
         };
-      const TOTAL_OPENINGS_AREA = 7.04;
 
-      it('Returns the area of the openings ', () => {
-        const roomArea = businessRules.validOpenings(roomInfo);
+      it('Returns true when the area of the openings is smaller than 50% of the walls area. ', () => {
+        const validOpenings = businessRules.validOpenings(roomInfo);
 
-        expect(roomArea).equal(TOTAL_OPENINGS_AREA);
+        expect(validOpenings).to.be.equals(true);
+      });
+      it('Returns false when the area of the openings is greater than 50% of the walls area. ', () => {
+        roomInfo.openings.doors = 6;
+        const validOpenings = businessRules.validOpenings(roomInfo);
+
+        expect(validOpenings).to.be.equals(false);
       });
     });
 });
